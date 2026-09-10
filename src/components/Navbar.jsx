@@ -16,7 +16,7 @@ export const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close mobile drawer on route change
+  // Close mobile drawer on route change & scroll to top
   useEffect(() => {
     setMobileMenuOpen(false);
     window.scrollTo({ top: 0, behavior: 'instant' });
@@ -36,114 +36,111 @@ export const Navbar = () => {
 
   return (
     <header className={`site-header ${isScrolled ? 'scrolled' : ''}`}>
-      <div className="header-container">
+      <div className="container nav-wrapper">
         {/* Brand Logo */}
         <Link to="/" className="brand-logo" aria-label="Simlaya Inn Home">
-          <div className="logo-icon-wrapper">
-            <span className="logo-symbol">✦</span>
-          </div>
-          <div className="logo-text-group">
-            <span className="brand-title">{propertyData.property.name}</span>
-            <span className="brand-subtitle">VILLA & HOMESTAY</span>
+          <div className="brand-logo-icon">✦</div>
+          <div className="brand-logo-text">
+            <span className="brand-name">{propertyData.property.name}</span>
+            <span className="brand-tagline">VILLA & HOMESTAY</span>
           </div>
         </Link>
 
         {/* Desktop Nav Links */}
-        <nav className="desktop-nav" aria-label="Primary Navigation">
-          <ul className="nav-list">
-            {navLinks.map((link) => (
-              <li key={link.to} className="nav-item">
-                <NavLink
-                  to={link.to}
-                  className={({ isActive }) =>
-                    `nav-link ${isActive ? 'active' : ''}`
-                  }
-                  end={link.to === '/'}
-                >
-                  {link.label}
-                </NavLink>
-              </li>
-            ))}
-          </ul>
+        <nav className="nav-menu" aria-label="Primary Navigation">
+          {navLinks.map((link) => (
+            <NavLink
+              key={link.to}
+              to={link.to}
+              className={({ isActive }) =>
+                `nav-link ${isActive ? 'active' : ''}`
+              }
+              end={link.to === '/'}
+            >
+              {link.label}
+            </NavLink>
+          ))}
         </nav>
 
         {/* Right CTA / Phone Actions */}
-        <div className="header-actions">
+        <div className="nav-actions">
           <a
             href={`tel:${propertyData.property.intlPhone}`}
-            className="phone-quick-link"
+            className="nav-phone"
             title="Call Simlaya Inn"
           >
             <Icon name="phone" size={16} />
-            <span className="phone-number">{propertyData.property.phone}</span>
+            <span>{propertyData.property.phone}</span>
           </a>
 
-          <Link to="/contact" className="btn-book-nav">
-            <span className="btn-text">Check Availability</span>
+          <Link to="/contact" className="btn btn-primary btn-sm">
+            <span>Check Availability</span>
           </Link>
 
           {/* Mobile Hamburger Toggle */}
           <button
             type="button"
-            className={`mobile-menu-btn ${mobileMenuOpen ? 'active' : ''}`}
+            className="mobile-toggle"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label={mobileMenuOpen ? 'Close Menu' : 'Open Menu'}
             aria-expanded={mobileMenuOpen}
           >
-            <Icon name={mobileMenuOpen ? 'x' : 'menu'} size={24} />
+            <Icon name={mobileMenuOpen ? 'x' : 'menu'} size={22} />
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu Drawer */}
-      <div className={`mobile-nav-drawer ${mobileMenuOpen ? 'open' : ''}`}>
-        <div className="mobile-nav-backdrop" onClick={() => setMobileMenuOpen(false)} />
-        <div className="mobile-nav-content">
-          <div className="mobile-nav-header">
-            <div className="brand-title">{propertyData.property.name}</div>
-            <button
-              className="drawer-close-btn"
-              onClick={() => setMobileMenuOpen(false)}
-              aria-label="Close Menu"
-            >
-              <Icon name="x" size={20} />
-            </button>
-          </div>
+      {/* Mobile Menu Drawer Overlay */}
+      <div
+        className={`drawer-overlay ${mobileMenuOpen ? 'active' : ''}`}
+        onClick={() => setMobileMenuOpen(false)}
+      />
 
-          <ul className="mobile-nav-list">
-            {navLinks.map((link) => (
-              <li key={link.to}>
-                <NavLink
-                  to={link.to}
-                  className={({ isActive }) =>
-                    `mobile-nav-link ${isActive ? 'active' : ''}`
-                  }
-                  end={link.to === '/'}
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  {link.label}
-                </NavLink>
-              </li>
-            ))}
-          </ul>
+      {/* Mobile Drawer */}
+      <div className={`mobile-drawer ${mobileMenuOpen ? 'open' : ''}`}>
+        <div className="drawer-header">
+          <div className="brand-name">{propertyData.property.name}</div>
+          <button
+            className="drawer-close"
+            onClick={() => setMobileMenuOpen(false)}
+            aria-label="Close Menu"
+          >
+            <Icon name="x" size={20} />
+          </button>
+        </div>
 
-          <div className="mobile-nav-footer">
-            <a
-              href={`tel:${propertyData.property.intlPhone}`}
-              className="mobile-phone-btn"
-            >
-              <Icon name="phone" size={18} />
-              <span>Call Host: {propertyData.property.phone}</span>
-            </a>
-
-            <Link
-              to="/contact"
-              className="btn btn-primary btn-block"
+        <div className="drawer-links">
+          {navLinks.map((link) => (
+            <NavLink
+              key={link.to}
+              to={link.to}
+              className={({ isActive }) =>
+                `nav-link ${isActive ? 'active' : ''}`
+              }
+              end={link.to === '/'}
               onClick={() => setMobileMenuOpen(false)}
             >
-              Check Availability & Book
-            </Link>
-          </div>
+              {link.label}
+            </NavLink>
+          ))}
+        </div>
+
+        <div className="drawer-footer">
+          <a
+            href={`tel:${propertyData.property.intlPhone}`}
+            className="mobile-phone-btn"
+          >
+            <Icon name="phone" size={18} />
+            <span>Call Host: {propertyData.property.phone}</span>
+          </a>
+
+          <Link
+            to="/contact"
+            className="btn btn-primary btn-block"
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            Check Availability & Book
+          </Link>
         </div>
       </div>
     </header>
