@@ -1,0 +1,413 @@
+/* ==========================================================================
+   Simlaya Inn - Master Design System & Core Styles
+   Coastal Tropical Luxury Palette (Beige, Deep Teal, Terracotta)
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
+
+:root {
+  /* Color Palette */
+  --teal-900: #082832;
+  --teal-800: #0E3B49;
+  --teal-700: #114B5F;
+  --teal-600: #166079;
+  --teal-500: #1D7898;
+  --teal-100: #E3F2F6;
+  --teal-50:  #F0F8FA;
+
+  --terracotta-700: #A84931;
+  --terracotta-600: #C96045;
+  --terracotta-500: #E07A5F;
+  --terracotta-400: #EA9680;
+  --terracotta-100: #FCECE8;
+
+  --sand-50:  #FBF8F3;
+  --sand-100: #F5EFE6;
+  --sand-200: #EBE0D2;
+  --sand-300: #DECFC0;
+  --sand-400: #CBB8A3;
+
+  --gold-500: #E5A93C;
+  --gold-600: #CA8E24;
+
+  --neutral-900: #131E29;
+  --neutral-800: #1E293B;
+  --neutral-700: #334155;
+  --neutral-600: #475569;
+  --neutral-500: #64748B;
+  --neutral-400: #94A3B8;
+  --neutral-300: #CBD5E1;
+  --neutral-200: #E2E8F0;
+  --neutral-100: #F1F5F9;
+  --white:       #FFFFFF;
+
+  /* Semantic Mappings */
+  --bg-body: var(--sand-50);
+  --bg-surface: var(--white);
+  --bg-surface-sand: var(--sand-100);
+  --bg-surface-teal: var(--teal-900);
+  --text-main: var(--neutral-800);
+  --text-muted: var(--neutral-600);
+  --text-light: var(--neutral-400);
+  --text-inverse: var(--white);
+  --border-subtle: var(--sand-200);
+  --border-light: rgba(17, 75, 95, 0.08);
+
+  /* Typography */
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  /* Shadows */
+  --shadow-xs: 0 1px 3px rgba(19, 30, 41, 0.05);
+  --shadow-sm: 0 4px 12px rgba(17, 75, 95, 0.06);
+  --shadow-md: 0 10px 30px rgba(17, 75, 95, 0.09);
+  --shadow-lg: 0 20px 48px rgba(17, 75, 95, 0.13);
+  --shadow-xl: 0 28px 64px rgba(17, 75, 95, 0.18);
+  --shadow-gold: 0 8px 24px rgba(229, 169, 60, 0.25);
+  --shadow-terracotta: 0 8px 24px rgba(224, 122, 95, 0.3);
+
+  /* Transitions & Animation */
+  --transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-normal: 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-slow: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Radii */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --radius-xl: 32px;
+  --radius-full: 9999px;
+
+  /* Layout */
+  --container-max: 1240px;
+  --nav-height: 84px;
+}
+
+/* ==========================================================================
+   Base & Resets
+   ========================================================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-body);
+  color: var(--text-main);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+input, button, textarea, select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+ul, ol {
+  list-style: none;
+}
+
+/* ==========================================================================
+   Typography Helpers
+   ========================================================================== */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  color: var(--neutral-900);
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+}
+
+h1 { font-size: clamp(2.4rem, 5vw, 3.8rem); font-weight: 700; }
+h2 { font-size: clamp(2.0rem, 4vw, 2.8rem); }
+h3 { font-size: clamp(1.4rem, 2.5vw, 1.85rem); }
+h4 { font-size: 1.25rem; font-family: var(--font-sans); font-weight: 600; }
+
+p {
+  color: var(--text-muted);
+  font-size: 1.05rem;
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, var(--teal-800) 0%, var(--terracotta-600) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-terracotta {
+  color: var(--terracotta-600);
+}
+
+.text-teal {
+  color: var(--teal-700);
+}
+
+/* ==========================================================================
+   Containers & Layout
+   ========================================================================== */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.section {
+  padding: 6rem 0;
+  position: relative;
+}
+
+.section-sand {
+  background-color: var(--sand-100);
+}
+
+.section-teal {
+  background-color: var(--teal-900);
+  color: var(--white);
+}
+
+.section-teal h2,
+.section-teal h3,
+.section-teal h4 {
+  color: var(--white);
+}
+
+.section-teal p {
+  color: var(--neutral-300);
+}
+
+/* Section Header Component */
+.section-header {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto 3.5rem auto;
+}
+
+.section-header.text-left {
+  text-align: left;
+  margin-left: 0;
+}
+
+.section-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--terracotta-600);
+  margin-bottom: 0.85rem;
+  padding: 0.35rem 0.9rem;
+  background: var(--terracotta-100);
+  border-radius: var(--radius-full);
+}
+
+.section-teal .section-eyebrow {
+  background: rgba(224, 122, 95, 0.2);
+  color: var(--terracotta-400);
+}
+
+.section-title {
+  margin-bottom: 1.1rem;
+}
+
+.section-desc {
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
+
+/* ==========================================================================
+   Buttons & Interactive Elements
+   ========================================================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 0.98rem;
+  padding: 0.85rem 1.75rem;
+  border-radius: var(--radius-full);
+  transition: all var(--transition-normal);
+  white-space: nowrap;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--terracotta-500) 0%, var(--terracotta-600) 100%);
+  color: var(--white);
+  box-shadow: var(--shadow-terracotta);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, var(--terracotta-600) 0%, var(--terracotta-700) 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(224, 122, 95, 0.4);
+  color: var(--white);
+}
+
+.btn-teal {
+  background: linear-gradient(135deg, var(--teal-700) 0%, var(--teal-800) 100%);
+  color: var(--white);
+  box-shadow: 0 8px 24px rgba(17, 75, 95, 0.25);
+}
+
+.btn-teal:hover {
+  background: linear-gradient(135deg, var(--teal-600) 0%, var(--teal-700) 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(17, 75, 95, 0.35);
+  color: var(--white);
+}
+
+.btn-secondary {
+  background: var(--white);
+  color: var(--teal-800);
+  border: 1.5px solid var(--border-subtle);
+  box-shadow: var(--shadow-xs);
+}
+
+.btn-secondary:hover {
+  border-color: var(--teal-700);
+  background: var(--sand-50);
+  transform: translateY(-2px);
+  color: var(--teal-700);
+}
+
+.btn-outline-white {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(8px);
+  color: var(--white);
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+}
+
+.btn-outline-white:hover {
+  background: var(--white);
+  color: var(--teal-900);
+  border-color: var(--white);
+  transform: translateY(-2px);
+}
+
+.btn-whatsapp {
+  background: #25D366;
+  color: var(--white);
+  box-shadow: 0 8px 24px rgba(37, 211, 102, 0.3);
+}
+
+.btn-whatsapp:hover {
+  background: #1EBE5D;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(37, 211, 102, 0.45);
+  color: var(--white);
+}
+
+.btn-sm {
+  padding: 0.55rem 1.15rem;
+  font-size: 0.88rem;
+}
+
+.btn-lg {
+  padding: 1.05rem 2.25rem;
+  font-size: 1.08rem;
+}
+
+/* ==========================================================================
+   Badges, Pills & Rating Stars
+   ========================================================================== */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.75rem;
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.badge-gold {
+  background: #FFF7E6;
+  color: #B47805;
+  border: 1px solid #FFE0A3;
+}
+
+.badge-teal {
+  background: var(--teal-100);
+  color: var(--teal-800);
+}
+
+.badge-terracotta {
+  background: var(--terracotta-100);
+  color: var(--terracotta-700);
+}
+
+.stars {
+  display: inline-flex;
+  gap: 0.2rem;
+  color: var(--gold-500);
+  font-size: 1rem;
+}
+
+/* ==========================================================================
+   Animations
+   ========================================================================== */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.6); }
+  50% { transform: scale(1.04); box-shadow: 0 0 0 12px rgba(37, 211, 102, 0); }
+}
+
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.animate-float {
+  animation: floatSlow 4s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 2.5s infinite;
+}
