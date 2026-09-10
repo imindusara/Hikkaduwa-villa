@@ -78,6 +78,12 @@
 
     if (roomSelect) {
       roomSelect.innerHTML = optionsHtml;
+      // Preselect room from URL query if available
+      const urlParams = new URLSearchParams(window.location.search);
+      const preselectedRoom = urlParams.get('room');
+      if (preselectedRoom && SIMLAYA_DATA.rooms.some(r => r.id === preselectedRoom)) {
+        roomSelect.value = preselectedRoom;
+      }
     }
     if (heroRoom) {
       heroRoom.innerHTML = `<option value="all">Any Room Type</option>` + optionsHtml;
@@ -121,6 +127,8 @@
     const bookingSection = document.getElementById('booking');
     if (bookingSection) {
       bookingSection.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      window.location.href = `contact.html?checkin=${heroCheckin ? heroCheckin.value : ''}&checkout=${heroCheckout ? heroCheckout.value : ''}&room=${heroRoom ? heroRoom.value : 'all'}`;
     }
   }
 
@@ -128,12 +136,14 @@
     if (roomSelect) {
       roomSelect.value = roomId;
       calculateEstimatedPrice();
+      const bookingSection = document.getElementById('booking');
+      if (bookingSection) {
+        bookingSection.scrollIntoView({ behavior: 'smooth' });
+      }
+      showToast(`Selected room updated in booking form.`);
+    } else {
+      window.location.href = `contact.html?room=${roomId}#booking-form`;
     }
-    const bookingSection = document.getElementById('booking');
-    if (bookingSection) {
-      bookingSection.scrollIntoView({ behavior: 'smooth' });
-    }
-    showToast(`Selected room updated in booking form.`);
   }
 
   function sendWhatsAppBooking() {

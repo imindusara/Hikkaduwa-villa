@@ -305,24 +305,42 @@
     const drawerOverlay = document.getElementById('drawer-overlay');
     const drawerClose = document.getElementById('drawer-close');
     const drawerLinks = document.querySelectorAll('.drawer-links .nav-link');
+    const allNavLinks = document.querySelectorAll('.nav-menu .nav-link, .drawer-links .nav-link');
+
+    // Auto-detect and highlight active route link
+    const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+    allNavLinks.forEach(link => {
+      const linkHref = link.getAttribute('href');
+      if (!linkHref) return;
+      const targetFile = linkHref.split('#')[0].split('?')[0].split('/').pop();
+      if (targetFile === currentPath || (currentPath === '' && (targetFile === 'index.html' || targetFile === '')) || (currentPath === 'index.html' && (targetFile === '' || targetFile === 'index.html' || targetFile === './'))) {
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
+      }
+    });
 
     // Sticky scroll effect
     window.addEventListener('scroll', () => {
-      if (window.scrollY > 40) {
-        header.classList.add('scrolled');
-      } else {
-        header.classList.remove('scrolled');
+      if (header) {
+        if (window.scrollY > 40) {
+          header.classList.add('scrolled');
+        } else {
+          header.classList.remove('scrolled');
+        }
       }
     });
 
     // Mobile drawer toggle
     function openDrawer() {
+      if (!mobileDrawer || !drawerOverlay) return;
       mobileDrawer.classList.add('open');
       drawerOverlay.classList.add('active');
       document.body.style.overflow = 'hidden';
     }
 
     function closeDrawer() {
+      if (!mobileDrawer || !drawerOverlay) return;
       mobileDrawer.classList.remove('open');
       drawerOverlay.classList.remove('active');
       document.body.style.overflow = '';

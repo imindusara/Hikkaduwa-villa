@@ -1,6 +1,6 @@
 # Simlaya Inn — Boutique Villa & Homestay Website
 
-A modern, responsive website built for **Simlaya Inn**, a boutique villa and homestay in Hikkaduwa, Sri Lanka.
+A modern, responsive website built for **Simlaya Inn**, a boutique villa and homestay in Hikkaduwa, Sri Lanka. Built with a dedicated multi-page routed architecture.
 
 ## 🌴 About Simlaya Inn
 - **Tagline:** *"Your peaceful coastal escape in Hikkaduwa"*
@@ -11,25 +11,32 @@ A modern, responsive website built for **Simlaya Inn**, a boutique villa and hom
 
 ---
 
-## ✨ Features
-- **Modern Coastal Aesthetics:** Curated coastal color palette (Sandy Beige, Ocean Teal, Warm Terracotta) with typography pairing (*Playfair Display* & *Plus Jakarta Sans*).
-- **Hero Image Slider & Quick Availability Search:** Integrated check-in/out date pickers and guest selectors.
-- **Boutique Rooms & Rates:** Detailed showcase with pricing in **LKR (Sri Lankan Rupee)**, capacity, room dimensions, and amenity icons.
-- **Amenities Categorized:** Comprehensive listing including high-speed fiber WiFi, private parking, inverter AC, private bathrooms, and garden terrace.
-- **Location & Distances Guide:** Google Maps embed pinned at coordinates `6.143, 80.1017` with category filters (Transit, Beaches, Dining, Sightseeing).
-- **Things To Do Nearby:** Informational guide to local attractions (turtle snorkeling, Galle Fort, whale watching, cooking classes).
-- **Photo Gallery & Lightbox:** 32 curated property photo placeholders with category filter tabs and fullscreen lightbox modal with keyboard controls.
-- **Policies / FAQ:** Transparent house rules and check-in/out guidelines.
-- **Guest Reviews:** 5.0★ Google testimonials with an interactive "Write a Review" modal for Booking.com guests.
-- **Direct Reservation Engine:** Live LKR stay estimator + instant **WhatsApp booking dispatch** and email inquiry.
-- **Floating WhatsApp Button:** Fast direct contact for inquiries and local assistance.
+## 🗺️ Dedicated Pages & Routes
+
+| Route | Page File | Description |
+|---|---|---|
+| `/` | `index.html` | **Home**: Hero background slider, quick availability search, trust strip, homestay story, and feature previews |
+| `/rooms` | `rooms.html` | **Rooms & Rates**: 4 boutique accommodations, pricing in LKR, bed types, size, amenities, room detail modal & booking actions |
+| `/amenities` | `amenities.html` | **Amenities & Facilities**: 6 categorized groups with custom SVG icons (WiFi, parking, AC, private bathrooms, terrace) |
+| `/location` | `location.html` | **Location & Distances**: Interactive Google Maps embed (`6.143, 80.1017`) and walking/driving distance filter tabs |
+| `/things-to-do` | `things-to-do.html` | **Things To Do Nearby**: Local activities (sea turtle snorkeling, Galle Fort, river safari, whale watching, cooking classes) |
+| `/gallery` | `gallery.html` | **Photo Gallery**: 32 curated property photo placeholders with category filter tabs and fullscreen lightbox modal |
+| `/policies` | `policies.html` | **Policies & FAQ**: House rules, check-in/out hours (3PM–6PM / 8AM–11AM), cash payment notice, children & quiet hours |
+| `/reviews` | `reviews.html` | **Guest Reviews**: 5.0★ Google reviews, rating summary, and interactive "Write a Review" modal |
+| `/contact` | `contact.html` | **Contact & Reservations**: Complete reservation form, live LKR stay estimator, direct WhatsApp booking generator, host details & map |
+
+---
+
+## ✨ Design & Tech Highlights
+- **Coastal Aesthetic:** Sandy Beige (`#FBF8F3`, `#F5EFE6`), Deep Ocean Teal (`#082832`, `#114B5F`), and Warm Terracotta (`#C96045`, `#E07A5F`).
+- **Typography:** *Playfair Display* serif headings paired with *Plus Jakarta Sans* body text.
+- **Dynamic Navigation:** Active route detection, sticky header, compact responsive layout without overflow, and mobile drawer.
+- **Reservation Engine:** Live LKR price calculation and instant WhatsApp message dispatch (`+94 77 777 8853`).
+- **Zero Build Step:** 100% standard HTML5, CSS3, and Vanilla JavaScript. Runs directly on GitHub Pages, Vercel, Netlify, or Apache/Nginx.
 
 ---
 
 ## 🚀 Getting Started
-
-### Prerequisites
-No complex framework dependencies required — built with standard HTML5, CSS3, and Vanilla JavaScript.
 
 ### Run Locally
 You can run this project using any static file server:
@@ -52,16 +59,24 @@ Open [http://localhost:3000](http://localhost:3000) in your web browser.
 
 ```
 simlaya-inn/
-├── index.html              # Main HTML5 page with Schema.org JSON-LD
+├── index.html              # Home page
+├── rooms.html              # Rooms & rates page
+├── amenities.html          # Property amenities page
+├── location.html           # Location, directions & map page
+├── things-to-do.html       # Local attractions & tours page
+├── gallery.html            # Photo gallery & lightbox page
+├── policies.html           # Policies & guidelines FAQ page
+├── reviews.html            # Guest reviews & testimonials page
+├── contact.html            # Reservation form & contact page
 ├── README.md               # Project documentation
 ├── .gitignore              # Git ignore file
 ├── css/
 │   ├── main.css            # Design tokens & base styles
-│   ├── components.css      # Component styles (cards, hero, modals)
+│   ├── components.css      # Component styles (hero, cards, modals, page-hero)
 │   └── responsive.css      # Mobile drawer & responsive breakpoints
 ├── js/
 │   ├── data.js             # Data layer (rooms, amenities, distances, gallery, reviews)
-│   ├── app.js              # Application controller & UI rendering
+│   ├── app.js              # Application controller & active route highlighter
 │   ├── booking.js          # Booking calculation & WhatsApp message builder
 │   └── gallery.js          # Lightbox and gallery category filter
 └── assets/
