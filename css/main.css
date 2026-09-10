@@ -79,8 +79,8 @@
   --radius-full: 9999px;
 
   /* Layout */
-  --container-max: 1240px;
-  --nav-height: 84px;
+  --container-max: 1280px;
+  --nav-height: 76px;
 }
 
 /* ==========================================================================
@@ -178,8 +178,8 @@ p {
   max-width: var(--container-max);
   margin-left: auto;
   margin-right: auto;
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
+  padding-left: clamp(1rem, 2.5vw, 1.75rem);
+  padding-right: clamp(1rem, 2.5vw, 1.75rem);
 }
 
 .section {
