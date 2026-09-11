@@ -1,26 +1,10 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import { propertyData } from '../data/propertyData';
 import { Icon } from '../components/Icons';
 import { PageCTA } from '../components/PageCTA';
 
 export const Home = () => {
-  const navigate = useNavigate();
-  const [checkIn, setCheckIn] = useState('');
-  const [checkOut, setCheckOut] = useState('');
-  const [roomType, setRoomType] = useState('deluxe-garden');
-  const [guests, setGuests] = useState('2');
-
-  const handleQuickSearch = (e) => {
-    e.preventDefault();
-    const params = new URLSearchParams();
-    if (roomType) params.set('room', roomType);
-    if (checkIn) params.set('checkin', checkIn);
-    if (checkOut) params.set('checkout', checkOut);
-    if (guests) params.set('guests', guests);
-    navigate(`/contact?${params.toString()}`);
-  };
-
   return (
     <div className="page-home">
       {/* Hero Section */}
@@ -51,70 +35,6 @@ export const Home = () => {
                 Check Availability
               </Link>
             </div>
-          </div>
-
-          {/* Quick Search Availability Card */}
-          <div className="hero-search-card">
-            <h3 className="search-card-title">Check Rates & Availability</h3>
-            <p className="search-card-sub">Guaranteed best rates booking direct with host</p>
-
-            <form onSubmit={handleQuickSearch} className="quick-search-form">
-              <div className="search-field-group">
-                <label className="field-label">Preferred Room</label>
-                <select
-                  value={roomType}
-                  onChange={(e) => setRoomType(e.target.value)}
-                  className="search-select"
-                >
-                  {propertyData.rooms.map((room) => (
-                    <option key={room.id} value={room.id}>
-                      {room.name} (LKR {room.pricePerNight.toLocaleString()}/nt)
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <div className="search-grid-2">
-                <div className="search-field-group">
-                  <label className="field-label">Check-in Date</label>
-                  <input
-                    type="date"
-                    value={checkIn}
-                    onChange={(e) => setCheckIn(e.target.value)}
-                    className="search-input"
-                  />
-                </div>
-                <div className="search-field-group">
-                  <label className="field-label">Check-out Date</label>
-                  <input
-                    type="date"
-                    value={checkOut}
-                    onChange={(e) => setCheckOut(e.target.value)}
-                    className="search-input"
-                  />
-                </div>
-              </div>
-
-              <div className="search-field-group">
-                <label className="field-label">Guests</label>
-                <select
-                  value={guests}
-                  onChange={(e) => setGuests(e.target.value)}
-                  className="search-select"
-                >
-                  <option value="1">1 Guest</option>
-                  <option value="2">2 Guests</option>
-                  <option value="3">3 Guests</option>
-                  <option value="4">4 Guests</option>
-                  <option value="7">Entire Villa (Up to 7)</option>
-                </select>
-              </div>
-
-              <button type="submit" className="btn btn-primary btn-block">
-                <span>View Availability</span>
-                <Icon name="arrow-right" size={16} />
-              </button>
-            </form>
           </div>
         </div>
       </section>
